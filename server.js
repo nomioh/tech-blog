@@ -3,7 +3,7 @@ const routes = require("./controllers");
 const sequelize = require("./config/connection");
 
 // hbs helper function
-const helpers = require("./utils/helpers");
+const helpers = require("./utils/helpers.js");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -32,7 +32,7 @@ const sess = {
 
 app.use(session(sess));
 
-const helpers = require("./utils/helpers");
+const helpers = require("./utils/helpers.js");
 
 const hbs = exphbs.create({ helpers });
 
