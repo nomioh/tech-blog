@@ -7,21 +7,10 @@ const withAuth = require("../../utils/auth");
 router.get("/", (req, res) => {
   console.log("======================");
   Posts.findAll({
-    attributes: [
-      "id",
-      "post_url",
-      "title",
-      "created_at",
-      [
-        sequelize.literal(
-          "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-        ),
-        "vote_count",
-      ],
-    ],
+    attributes: ["id", "post_url", "title", "created_at", "vote_count"],
     include: [
       {
-        model: Comment,
+        model: Comments,
         attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
         include: {
           model: User,
@@ -34,7 +23,7 @@ router.get("/", (req, res) => {
       },
     ],
   })
-    .then((dbPostData) => res.json(dbPostData))
+    .then((dbPostsData) => res.json(dbPostsData))
     .catch((err) => {
       console.log(err);
       res.status(500).json(err);
@@ -100,21 +89,8 @@ router.posts("/", withAuth, (req, res) => {
     });
 });
 
-router.put("/upvote", withAuth, (req, res) => {
-  // custom static method created in models/Post.js
-  Posts.upvote(
-    { ...req.body, user_id: req.session.user_id },
-    { Comments, Users }
-  )
-    .then((updatedVoteData) => res.json(updatedVoteData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
-
 router.put("/:id", withAuth, (req, res) => {
-  Post.update(
+  Posts.update(
     {
       title: req.body.title,
     },
@@ -124,12 +100,12 @@ router.put("/:id", withAuth, (req, res) => {
       },
     }
   )
-    .then((dbPostData) => {
-      if (!dbPostData) {
+    .then((dbPostsData) => {
+      if (!dbPostsData) {
         res.status(404).json({ message: "No post found with this id" });
         return;
       }
-      res.json(dbPostData);
+      res.json(dbPostsData);
     })
     .catch((err) => {
       console.log(err);
@@ -139,17 +115,17 @@ router.put("/:id", withAuth, (req, res) => {
 
 router.delete("/:id", withAuth, (req, res) => {
   console.log("id", req.params.id);
-  Post.destroy({
+  Posts.destroy({
     where: {
       id: req.params.id,
     },
   })
-    .then((dbPostData) => {
-      if (!dbPostData) {
+    .then((dbPostsData) => {
+      if (!dbPostsData) {
         res.status(404).json({ message: "No post found with this id" });
         return;
       }
-      res.json(dbPostData);
+      res.json(dbPostsData);
     })
     .catch((err) => {
       console.log(err);
