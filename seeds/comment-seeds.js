@@ -23,7 +23,7 @@ const CommentsData = [
     post_id: 2,
   },
   {
-    comments_text: "abc",
+    comments_text: "This was such a helpful article on ORMs! :) ",
     user_id: 5,
     post_id: 1,
   },

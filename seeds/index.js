@@ -10,7 +10,7 @@ const seedAll = async () => {
     force: true,
   });
   console.log("---DB SYNCED ---");
-  await seedUsers();
+  await seedUser();
   console.log("--- USERS SEEDED ----");
 
   await seedPosts();
