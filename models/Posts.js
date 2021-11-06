@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 // create our Post model
-
+class Posts extends Model {}
 // create fields/columns for Post model
 Posts.init(
   {
@@ -39,3 +39,7 @@ Posts.init(
 );
 
 module.exports = Posts;
+
+const seedPosts = () => Post.bulkCreate(postData);
+
+module.exports = seedPosts;

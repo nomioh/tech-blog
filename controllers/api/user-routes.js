@@ -33,11 +33,11 @@ router.get("/:id", (req, res) => {
           attributes: ["title"],
         },
       },
-      {
-        model: Posts,
-        attributes: ["title"],
-        as: "voted_posts",
-      },
+      // {
+      //   model: Posts,
+      //   attributes: ["title"],
+      //   as: "voted_posts",
+      // },
     ],
   })
     .then((dbUserData) => {
