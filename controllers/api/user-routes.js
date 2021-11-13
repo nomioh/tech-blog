@@ -53,7 +53,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.posts("/", (req, res) => {
+router.post("/", (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,

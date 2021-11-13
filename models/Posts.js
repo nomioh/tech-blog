@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Sequilize, Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 // create our Post model
 class Posts extends Model {}
@@ -9,6 +9,7 @@ Posts.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      unique: true,
       autoIncrement: true,
     },
     title: {
@@ -32,14 +33,14 @@ Posts.init(
   },
   {
     sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: "post",
+    // freezeTableName: true,
+    // underscored: true,
+    modelName: "posts",
   }
 );
 
 module.exports = Posts;
 
-const seedPosts = () => Post.bulkCreate(postData);
+// const seedPosts = () => Posts.bulkCreate(postData);
 
-module.exports = seedPosts;
+// module.exports = seedPosts;

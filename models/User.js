@@ -17,6 +17,7 @@ User.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
+      unique: true,
       autoIncrement: true,
     },
     username: {
