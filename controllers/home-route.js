@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     include: [
       {
         model: Comments,
-        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        attributes: ["id", "comment_text", "post_id", "user_id", "createdAt"],
         include: {
           model: User,
           attributes: ["username"],
@@ -36,7 +36,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// get single post
+// get single post by an id
 router.get("/post/:id", (req, res) => {
   Posts.findOne({
     where: {
@@ -46,7 +46,7 @@ router.get("/post/:id", (req, res) => {
       "id",
       "post_url",
       "title",
-      "created_at",
+      "createdAt",
       [
         sequelize.literal(
           "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
@@ -57,7 +57,7 @@ router.get("/post/:id", (req, res) => {
     include: [
       {
         model: Comments,
-        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+        attributes: ["id", "comment_text", "post_id", "user_id", "createdAt"],
         include: {
           model: User,
           attributes: ["username"],
@@ -88,6 +88,7 @@ router.get("/post/:id", (req, res) => {
     });
 });
 
+// log in
 router.get("/login", (req, res) => {
   if (req.session.loggedIn) {
     res.redirect("/");
@@ -95,6 +96,16 @@ router.get("/login", (req, res) => {
   }
 
   res.render("login");
+});
+
+// sign up
+router.get("/signup", (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect("/");
+    return;
+  }
+
+  res.render("signup");
 });
 
 module.exports = router;

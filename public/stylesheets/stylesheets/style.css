@@ -1,0 +1,33 @@
+body,
+html {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+a {
+  color: rgba(7, 8, 41, 0.947);
+  transition: color 0.1s;
+}
+
+a:hover {
+  color: rgb(50, 46, 94);
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: left;
+  padding: 0 1%;
+}

@@ -35,14 +35,10 @@ Posts.init(
   },
   {
     sequelize,
-    // freezeTableName: true,
-    // underscored: true,
+    freezeTableName: true,
+    underscored: true,
     modelName: "posts",
   }
 );
 
 module.exports = Posts;
-
-// const seedPosts = () => Posts.bulkCreate(postData);
-
-// module.exports = seedPosts;
