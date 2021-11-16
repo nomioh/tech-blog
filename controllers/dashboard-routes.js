@@ -11,18 +11,7 @@ router.get("/", withAuth, (req, res) => {
     where: {
       user_id: req.session.user_id,
     },
-    attributes: [
-      "id",
-      "post_url",
-      "title",
-      "createdAt",
-      [
-        sequelize.literal(
-          "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-        ),
-        "vote_count",
-      ],
-    ],
+    attributes: ["id", "post_url", "title", "createdAt"],
     include: [
       {
         model: Comments,
